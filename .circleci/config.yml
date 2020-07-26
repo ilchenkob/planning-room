@@ -10,5 +10,5 @@
      steps:
        - checkout
        - run: dotnet build ./src/PlanningRoom.sln --configuration Release
-       - run: cd ./src/PlanningRoom.Web/ClientApp && npm ci
-       - run: cd ./src/PlanningRoom.Web/ClientApp && npm run build:prod
+       - run: (cd ./src/PlanningRoom.Web/ClientApp) -and (npm ci)
+       - run: (cd ./src/PlanningRoom.Web/ClientApp) -and (npm run build:prod)
