@@ -10,7 +10,7 @@ install:
   # Install repo specific stuff
 before_build:
   - cmd: dotnet --version
-  - cmd: dotnet restore ./src/PlanningRoom.Web.sln --verbosity m
+  - cmd: dotnet restore ./src/PlanningRoom.sln --verbosity m
 build_script:
   - cmd: dotnet publish ./src/PlanningRoom.Web/PlanningRoom.Web.csproj -c Release
 after_build:
