@@ -1,0 +1,17 @@
+ version: 2.1
+
+ orbs:
+  win: circleci/windows@2.2.0
+
+ jobs:
+   build:
+     executor: win/default     
+    
+     steps:
+       - checkout
+       - run:
+          name: Build server
+          command: dotnet build ./src/PlanningRoom.sln --configuration Release
+       - run:
+          name: Build front-end
+          command: cd ./src/PlanningRoom.Web/ClientApp; npm ci; npm run lint; npm run build:prod
