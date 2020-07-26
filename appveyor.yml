@@ -1,5 +1,7 @@
 version: '0.4.{build}'
 image: Visual Studio 2019
+environment:
+  nodejs_version: "12"
 branches:
   only:
   - master
@@ -7,7 +9,7 @@ branches:
 init:
   - cmd: git config --global core.autocrlf true
 install:
-  # Install repo specific stuff
+  - ps: Install-Product node $env:nodejs_version
 before_build:
   - cmd: dotnet --version
   - cmd: dotnet restore ./src/PlanningRoom.sln --verbosity m
