@@ -1,0 +1,27 @@
+version: '0.4.{build}'
+image: Visual Studio 2019
+branches:
+  only:
+  - master
+  - develop
+init:
+  - cmd: git config --global core.autocrlf true
+install:
+  # Install repo specific stuff
+before_build:
+  - cmd: dotnet --version
+  - cmd: dotnet restore ./src/PlanningRoom.Web.sln --verbosity m
+build_script:
+  - cmd: dotnet publish ./src/PlanningRoom.Web/PlanningRoom.Web.csproj -c Release
+after_build:
+  # Post-build actions
+artifacts:
+ - path: 'src/PlanningRoom.Web/bin/Release/netcoreapp3.1/publish'
+   name: PlanningRoom.Web
+   type: WebDeployPackage
+clone_depth: 1
+test_script:
+  # - cmd: dotnet xunit
+on_finish:
+  # there is nothing to cleanup
+deploy: off
