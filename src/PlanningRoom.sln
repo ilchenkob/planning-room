@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanningRoom.Web", "PlanningRoom.Web\PlanningRoom.Web.csproj", "{4C9B06DD-BC99-4A8F-B15E-878F6E82B875}"
+EndProject
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "PlanningRoom.Web.Tests", "PlanningRoom.Web.Tests\PlanningRoom.Web.Tests.csproj", "{0AF95985-B84E-4AFA-83FE-32245FEC3715}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4C9B06DD-BC99-4A8F-B15E-878F6E82B875}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C9B06DD-BC99-4A8F-B15E-878F6E82B875}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C9B06DD-BC99-4A8F-B15E-878F6E82B875}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C9B06DD-BC99-4A8F-B15E-878F6E82B875}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AF95985-B84E-4AFA-83FE-32245FEC3715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AF95985-B84E-4AFA-83FE-32245FEC3715}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AF95985-B84E-4AFA-83FE-32245FEC3715}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AF95985-B84E-4AFA-83FE-32245FEC3715}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

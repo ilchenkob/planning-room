@@ -1,0 +1,57 @@
+{
+  "name": "planning-room",
+  "version": "0.0.7",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "build:prod": "ng build --prod",
+    "build:watch": "ng build --watch",
+    "build:ssr": "ng run PlanningRoom.Web:server:dev",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "9.1.11",
+    "@angular/cdk": "^9.2.4",
+    "@angular/common": "9.1.11",
+    "@angular/compiler": "9.1.11",
+    "@angular/core": "9.1.11",
+    "@angular/forms": "9.1.11",
+    "@angular/material": "^9.2.4",
+    "@angular/platform-browser": "9.1.11",
+    "@angular/platform-browser-dynamic": "9.1.11",
+    "@angular/platform-server": "9.1.11",
+    "@angular/router": "9.1.11",
+    "@microsoft/signalr": "3.1.5",
+    "@ngrx/effects": "9.2.0",
+    "@ngrx/store": "9.2.0",
+    "@nguniversal/module-map-ngfactory-loader": "8.1.1",
+    "@ngx-pwa/local-storage": "9.0.3",
+    "aspnet-prerendering": "^3.0.1",
+    "bootstrap": "^4.3.1",
+    "core-js": "^3.3.3",
+    "popper.js": "^1.16.0",
+    "rxjs": "^6.5.3",
+    "tslib": "^1.10.0",
+    "zone.js": "~0.10.2"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.901.8",
+    "@angular/cli": "9.1.8",
+    "@angular/compiler-cli": "9.1.11",
+    "@angular/language-service": "9.1.11",
+    "@ngrx/store-devtools": "9.2.0",
+    "@types/node": "^12.11.1",
+    "codelyzer": "^5.1.2",
+    "typescript": "3.8.3"
+  },
+  "optionalDependencies": {
+    "node-sass": "^4.12.0",
+    "protractor": "~5.4.2",
+    "ts-node": "~8.4.1",
+    "tslint": "~5.20.0"
+  }
+}

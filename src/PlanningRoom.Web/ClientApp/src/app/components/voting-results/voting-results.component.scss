@@ -1,0 +1,28 @@
+@import '../common.scss';
+
+.main {
+  height: 100%;
+  padding-bottom: 20px;
+
+  .content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: calc(100% - 32px);
+    &_static {
+      height: 32px;
+    }
+
+    .value {
+      margin: 0 $padding1;
+      background-color: $color-primary;
+      margin-top: auto;
+      color: white;
+      padding: $padding1 * 2;
+
+      &.alone {
+        margin: auto auto 0 auto;
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+@import '../common.scss';
+
+.content {
+  height: 100%;
+
+  .tabs {
+    height: 100%;
+  }
+
+  .icon {
+    font-size: $icon-font-size;
+  }
+
+  .dark-text {
+    color: $color-black !important;
+  }
+  
+  .room-id {
+    padding-right: 0;
+  }
+}

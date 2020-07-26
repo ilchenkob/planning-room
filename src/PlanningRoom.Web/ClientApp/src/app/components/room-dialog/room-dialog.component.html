@@ -1,0 +1,43 @@
+<h2 mat-dialog-title class="pb-2">{{ newRoom ? 'Create planning poker room' : 'Room settings' }}</h2>
+<div mat-dialog-content>
+  <mat-form-field class="col-12">
+    <mat-label>Title</mat-label>
+    <input autofocus matInput
+      type="text"
+      name="title"
+      class="dark-text"
+      placeholder="Enter room title"
+      [disabled]="!newRoom"
+      [(ngModel)]="title">
+  </mat-form-field>
+  <mat-form-field class="col-12 mb-4">
+    <mat-label>Story base URL</mat-label>
+    <input autofocus matInput
+      type="text"
+      name="title"
+      placeholder="Enter base URL for story links"
+      [(ngModel)]="storyBaseLink">
+    <mat-hint>This URL will be used for story links</mat-hint>
+  </mat-form-field>
+  <mat-form-field class="col-12">
+    <mat-label>Voting timer, seconds:</mat-label>
+    <input type="number"
+      name="timerSeconds"
+      matInput placeholder="Enter timer seconds"
+      [min]="minTimerValue"
+      [max]="maxTimerValue"
+      [(ngModel)]="timerSeconds">
+  </mat-form-field>
+  <mat-label class="col-12">Available cards</mat-label>
+  <mat-grid-list cols="4" rowHeight="2:1" class="col-12 mt-2">
+    <mat-grid-tile *ngFor="let cardItem of cards">
+      <mat-checkbox class="text-left" [(ngModel)]="cardItem.selected" [checked]="cardItem.selected">
+        {{ cardItem.value < 0 ? '?' : cardItem.value }}
+      </mat-checkbox>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+<div mat-dialog-actions class="mt-4">
+  <button mat-button (click)="apply()" [disabled]="!canApply()">{{ newRoom ? 'CREATE' : 'SAVE' }}</button>
+  <button mat-button (click)="cancel()">CANCEL</button>
+</div>

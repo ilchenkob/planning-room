@@ -1,0 +1,65 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Provide sufficient contrast against white background */
+
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$app-primary: mat-palette($mat-indigo);
+$app-accent:  mat-palette($mat-indigo, 600, 500, 700);
+
+// The warn palette is optional (defaults to red).
+$app-warn:    mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($app-theme);
+
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #e01a76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+html, body {
+  height: 100%;
+  background-color: rgb(250, 250, 250);
+}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+button {
+  &:focus {
+    outline: none;
+  }
+}
+
+.full-height {
+  height: 100%;
+}
+
+.participants__item {
+  & .mat-list-item-content {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    max-width: calc(100% - 120px);
+  }
+}

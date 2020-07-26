@@ -1,0 +1,42 @@
+@import '../common.scss';
+
+.content {
+  max-height: $dimen-full-height;
+
+  display: flex;
+  flex-direction: column;
+
+  .stories-list {
+    padding: 4px;
+    overflow-y: auto;
+
+    .icon {
+      font-size: $icon-font-size;
+    }
+
+    .disabled-header {
+      cursor: default;
+    }
+    .story-points {
+      flex-direction: row-reverse;
+      margin-right: 0;
+      color: $color-black;
+    }
+  }
+
+  .add {
+    margin-top: auto;
+    padding: 4px;
+  }
+}
+
+.dark-text {
+  height: $dimen-full-height;
+  color: $color-black !important;
+}
+
+.stories__title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,0 +1,29 @@
+<ng-container *ngIf="isVoting; else votingResults">
+  <p class="text-center mat-title">Voting is in progress</p>
+</ng-container>
+<ng-template #votingResults>
+  <mat-card class="main" *ngIf="totalVotesNumber$ | async as total; else noResults">
+    <ng-container *ngIf="results$ | async as results">
+      <div class="content">
+        <div class="value text-center" *ngFor="let result of results"
+          [ngClass]="{'alone': results.length === 1}"
+          [style.width]="(results.length === 1 ? 50 : (100 / results.length) )+'%'"
+          [style.height]="(result.amount / total)*100+'%'">
+          <p>{{ result.amount + (result.amount === 1 ? ' vote' : ' votes') }}</p>
+        </div>
+      </div>
+      <div class="content content_static">
+        <div class="text-center" *ngFor="let result of results"
+            [style.width]="(100 / results.length)+'%'">
+          <p class="mat-title mb-0">{{ result.card > 0 ? result.card : '?' }}</p>
+        </div>
+      </div>
+    </ng-container>
+  </mat-card>
+  <ng-template #noResults>
+    <p class="text-center mat-title text-muted pt-5" *ngIf="isAnyStory$ | async; else startMessage">The team did not vote for this story yet</p>
+    <ng-template #startMessage>
+      <p class="text-center mat-title text-muted pt-5">This room does not contain any stories</p>
+    </ng-template>
+  </ng-template>
+</ng-template>

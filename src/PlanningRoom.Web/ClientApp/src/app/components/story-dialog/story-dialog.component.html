@@ -1,0 +1,38 @@
+<h2 mat-dialog-title class="pb-2">{{ dialogTitle }}</h2>
+<div mat-dialog-content>
+  <mat-form-field class="col-12">
+    <mat-label>ID</mat-label>
+    <input autofocus matInput
+      type="text"
+      name="storyId"
+      class="dark-text"
+      placeholder="Enter story ID"
+      [disabled]="dialogDisabled"
+      [ngModel]="storyId"
+      (ngModelChange)="setStoryId($event)">
+  </mat-form-field>
+  <mat-form-field class="col-12">
+    <mat-label>Title</mat-label>
+    <textarea matInput
+      type="text"
+      name="title"
+      class="dark-text"
+      placeholder="Enter story title"
+      [disabled]="dialogDisabled"
+      [(ngModel)]="title"></textarea>
+  </mat-form-field>
+  <mat-form-field class="col-12">
+    <mat-label>Link</mat-label>
+    <input matInput
+      type="text"
+      name="link"
+      class="dark-text"
+      placeholder="Enter link to story description"
+      [disabled]="dialogDisabled"
+      [(ngModel)]="link">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="mt-4">
+  <button mat-button [disabled]="!title" (click)="confirm()">{{ dialogActionButton }}</button>
+  <button mat-button (click)="cancel()">CANCEL</button>
+</div>

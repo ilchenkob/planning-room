@@ -1,0 +1,42 @@
+<div class="content">
+  <div class="stories-list">
+    <mat-accordion
+      matTooltipPosition="right"
+      [matTooltip]="isVoting ? 'Disabled while voting is in progress' : null">
+      <mat-expansion-panel *ngFor="let story of (stories$ | async)"
+        [disabled]="!isScrumMaster || ((selectedStory$ | async)?.id === story?.id) || isVoting"
+        [hideToggle]="true"
+        [expanded]="(selectedStory$ | async)?.id === story?.id"
+        (opened)="select(story?.id)">
+        <mat-expansion-panel-header [ngClass]="{'disabled-header': !isScrumMaster}">
+          <mat-panel-title class="dark-text">
+            {{ story?.storyId }}
+          </mat-panel-title>
+          <mat-panel-description class="story-points">
+            {{ !!story?.storyPoints ? story.storyPoints : '' }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p class="stories__title">{{ story?.title || '' }}</p>
+        <div class="action-buttons" *ngIf="isScrumMaster">
+          <button mat-icon-button
+              aria-label="Remove story"
+              class="action-button"
+              [disabled]="isVoting"
+              (click)="remove(story)">
+            <mat-icon class="icon" [inline]="true">delete</mat-icon>
+          </button>
+          <button mat-icon-button
+              aria-label="Edit story"
+              class="action-button"
+              [disabled]="isVoting"
+              (click)="edit(story)">
+            <mat-icon class="icon" [inline]="true">edit</mat-icon>
+          </button>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div class="add" *ngIf="isScrumMaster">
+    <button mat-raised-button class="col-12 mt-2" (click)="add()">ADD STORY</button>
+  </div>
+</div>

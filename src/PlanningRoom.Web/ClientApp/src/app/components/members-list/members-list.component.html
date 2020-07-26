@@ -1,0 +1,55 @@
+<div class="content">
+  <mat-card class="mb-0 participants" [ngClass]="{ 'participants-fullheight' : !isScrumMaster }">
+    <h2 class="col-12 pt-2 pb-2 text-center timer" [ngClass]="{'disabled': (timerValue$ | async) === 0}">
+      {{ timerValue$ | async | timerFormat }}
+    </h2>
+    <mat-divider></mat-divider>
+    <div class="participants-list" *ngIf="currentUser$ | async as currentUser">
+      <mat-list role="list" *ngIf="participants$ | async as members">
+        <mat-list-item class="participants__item" *ngFor="let teamMember of members; let i = index">
+          <div class="d-flex align-items-center">
+            <mat-icon class="mr-2">{{ teamMember?.isScrumMaster ? 'star_outline' : 'perm_identity' }}</mat-icon>
+            {{ (teamMember?.name?.length > 16) ? (teamMember?.name | slice:0:14)+'..' : teamMember?.name }}
+          </div>
+          <div class="item-data">
+            <ng-container *ngIf="teamMember?.selectedCard !== 0">
+              <span *ngIf="teamMember?.selectedCard < 900; else checkmark" class="pr-2">
+                {{ teamMember?.selectedCard < 0 ? '?' : teamMember?.selectedCard }}
+              </span>
+              <ng-template #checkmark>
+                <mat-icon>check</mat-icon>
+              </ng-template>
+            </ng-container>
+            <button mat-icon-button *ngIf="isScrumMaster && teamMember.id !== currentUser.id"
+                aria-label="Team members list item menu"
+                [matMenuTriggerFor]="menu"
+                [matMenuTriggerData]="{ id: teamMember.id }">
+              <mat-icon class="icon" [inline]="true">more_vert</mat-icon>
+            </button>
+          </div>
+          <mat-divider *ngIf="i < members.length - 1"></mat-divider>
+        </mat-list-item>
+    
+        <!-- <mat-list-item *ngFor="let n of [1,2,3,4,5,6,7,8,9,11,12,13,14, 15, 16,17,18,19,20,21]">
+          {{ 'Member ' + n }}
+          <mat-divider *ngIf="i < members.length - 1"></mat-divider>
+        </mat-list-item> -->
+      </mat-list>
+
+      <mat-menu #menu="matMenu">
+        <ng-template matMenuContent let-id="id">
+          <button mat-menu-item (click)="removeUser(id)">Disconnect</button>
+        </ng-template>
+      </mat-menu>
+    </div>
+    
+  </mat-card>
+  <ng-container *ngIf="isScrumMaster">
+    <button mat-raised-button class="col-12 mt-2 settings"
+        *ngIf="room$ | async as room"
+        [disabled]="isVoting"
+        (click)="showSettings(room)">
+      SETTINGS
+    </button>
+  </ng-container>
+</div>

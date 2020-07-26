@@ -1,0 +1,28 @@
+// dimensions
+$padding1: 8px;
+$dimen-full-height: 99.7%;
+$icon-font-size: 20px;
+
+// colors
+$color-accent1: #00796b;
+$color-primary: #0d47a1;
+$color-black: rgba(0, 0, 0, 0.87);
+$color-disabled: gray;
+$color-selected-border: #1565c0;
+
+// shared classes
+.dark-text {
+  color: $color-black;
+}
+
+.action-buttons {
+  display: flex;
+  direction: rtl;
+  margin-right: -0.8rem;
+}
+.action-button {
+  opacity: 0.5;
+  &:hover {
+    opacity: 1;
+  }
+}

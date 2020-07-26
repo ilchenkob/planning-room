@@ -1,0 +1,46 @@
+@import '../common.scss';
+
+:host /deep/ .mat-list-item-content {
+  padding: 0 !important;
+}
+
+.content {
+  height: $dimen-full-height;
+  .participants {
+    height: 91%;
+    overflow-y: hidden;
+
+    &-fullheight {
+      height: 100%;
+    }
+
+    &-list {
+      height: 92%;
+      overflow-y: auto;
+      
+      .item-data {
+        margin-left: auto;
+      }
+    }
+  }
+
+  .settings {
+    margin-top: auto;
+    padding: 4px;
+  }
+}
+
+.disabled {
+  color: $color-disabled !important;
+}
+
+.icon {
+  font-size: $icon-font-size;
+}
+
+.timer {
+  height: 8%;
+  font-weight: 400;
+  font-size: 3rem !important;
+  color: $color-primary;
+}

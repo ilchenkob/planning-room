@@ -1,0 +1,87 @@
+<div class="container-fluid row p-2 mx-auto full-height" *ngIf="!(isRoomLoading$ | async); else loadingIndication">
+  <app-stories-list class="story-list col-3"
+    [isScrumMaster]="isScrumMaster$ | async"
+    [isVoting]="isVoting$ | async">
+  </app-stories-list>
+  <div class="col-6 main-content">
+    <!-- Story details at the top -->
+    <mat-card class="story-details px-5" *ngIf="currentStory$ | async as story">
+      <mat-card-header class="col-12 header">
+        <mat-card-title class="story-id">
+          {{ story?.storyId }}
+        </mat-card-title>
+        <div class="story-points">
+          <mat-form-field style="width:76px;" *ngIf="cards$ | async as points">
+            <mat-label>Story points</mat-label>
+            <select class="pl-1" matNativeControl *ngIf="isScrumMaster$ | async; else pointsLabel"
+              [disabled]="isVoting$ | async"
+              [value]="story?.storyPoints"
+              (change)="setStoryPoints($event.target.value)">
+              <option value="0">None</option>
+              <option *ngFor="let option of points"
+                [selected]="option === story?.storyPoints"
+                [hidden]="option < 0"
+                [value]="option">
+                {{ option }}
+              </option>
+            </select>
+            <ng-template #pointsLabel>
+              <input matInput disabled class="text-center points-label"
+                [ngModel]="story?.storyPoints ? story?.storyPoints : ' '">
+            </ng-template>
+          </mat-form-field>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="mat-title story-title">{{ story?.title }}</p>
+        <div>
+          <a target="_blank" class="mat-subheading-2" [href]="story?.link">{{ story?.link }}</a>
+          <button mat-icon-button
+              *ngIf="story?.link"
+              aria-label="Copy link"
+              (click)="copyStoryLink(story?.link)">
+            <mat-icon class="icon" [inline]="true">content_copy</mat-icon>
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Voting results -->
+    <app-voting-results class="voting-results mt-2" [isVoting]="isVoting$ | async"></app-voting-results>
+
+    <!-- Control panel tabs at the bottom -->
+    <ng-container *ngIf="isScrumMaster$ | async; else cards">
+      <app-control-panel class="control-panel"
+          [currentStory] = "currentStory$ | async"
+          [isVoting]="isVoting$ | async">
+      </app-control-panel>
+    </ng-container>
+
+    <!-- Poker cards -->
+    <ng-template #cards>
+      <div class="row text-center cards">
+        <ng-container *ngIf="isVoting$ | async; else disabledCards">
+          <div class="poker-card p-2" *ngFor="let card of (cards$ | async)">
+            <mat-card [ngClass]="{'selected': (selectedCard$ | async) === card}"
+              (click)="selectCard(card)">
+              {{ card < 0 ? '?' : card }}
+            </mat-card>
+          </div>
+        </ng-container>
+        <ng-template #disabledCards>
+          <div class="poker-card p-2" *ngFor="let card of (cards$ | async)">
+            <mat-card class="disabled">{{ card < 0 ? '?' : card }}</mat-card>
+          </div>
+        </ng-template>
+      </div>
+    </ng-template>
+  </div>
+  <app-members-list class="team-member-list col-3" [isScrumMaster]="isScrumMaster$ | async">
+  </app-members-list>
+</div>
+
+<ng-template #loadingIndication>
+  <div class="loading-indicator">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

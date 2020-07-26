@@ -1,0 +1,91 @@
+@import '../common.scss';
+
+.container {
+  height: 100vh;
+}
+
+.story-list {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.team-member-list {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.loading-indicator {
+  width: 10vh;
+  height: 10vh;
+  margin: 45vh auto;
+}
+
+.main-content {
+  height: $dimen-full-height;
+  display: flex;
+  flex-direction: column;
+
+  .icon {
+    font-size: $icon-font-size;
+  }
+
+  .icon-button {
+    cursor: pointer;
+  }
+
+  >.story-details {
+    min-height: 18vh;
+
+    .header {
+      align-items: baseline;
+
+      .story-id {
+        font-weight: 400;
+      }
+      .story-points {
+        margin-left: auto;
+        .points-label {
+          color: $color-black;
+        }
+      }
+    }
+    .story-title {
+      font-weight: 300;
+    }
+  }
+  >.voting-results {
+    min-height: 20vh;
+    height: 25%;
+  }
+
+  >.control-panel {
+    margin-top: auto;
+    height: 44vh;
+  }
+
+  .cards {
+    margin: auto auto 0 auto;
+
+    .poker-card {
+      width: 15vh;
+      height: 20vh;
+      >mat-card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        height: 100%;
+        font-size: 2.8rem;
+        color: $color-primary;
+
+        &.selected {
+          border: 2px solid $color-selected-border;
+        }
+        &.disabled {
+          cursor: default;
+          color: $color-disabled;
+        }
+      }
+    }
+  }
+}

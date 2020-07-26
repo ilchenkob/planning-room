@@ -1,0 +1,52 @@
+<mat-card class="content">
+  <mat-tab-group class="tabs" mat-align-tabs="center">
+    <mat-tab label="VOTING">
+      <div class="col-12 mt-5 mb-2 d-flex justify-content-center">
+        <button mat-button class="col-3"
+          [disabled]="isVoting || !currentStory"
+          (click)="startTimer()">Start voting</button>
+        <button mat-button class="col-3"
+          [disabled]="!isVoting"
+          (click)="stopTimer()">Stop voting</button>
+      </div>
+    </mat-tab>
+    <mat-tab label="SHARE">
+      <div class="col-12 pt-4 pb-4 d-flex justify-content-between" *ngIf="roomId$ | async as roomId">
+        <mat-form-field class="col-9 room-id">
+          <mat-label>Room ID:</mat-label>
+          <input matInput disabled class="dark-text" [value]="roomId">
+          <mat-hint>This ID can be shared with team members</mat-hint>
+        </mat-form-field>
+        <ng-container *ngTemplateOutlet="roomIdButtonsTemplate; context: { id: roomId }">
+        </ng-container>
+      </div>
+      <div class="col-12 pt-2 pb-2 d-flex justify-content-between" *ngIf="adminRoomId$ | async as adminRoomId">
+        <mat-form-field class="col-9 room-id">
+          <mat-label>Scrum master room ID:</mat-label>
+          <input matInput disabled type="password" class="dark-text" [value]="adminRoomId | slice:0:24">
+          <mat-hint>Using this ID user can edit items in the room</mat-hint>
+        </mat-form-field>
+        <ng-container *ngTemplateOutlet="roomIdButtonsTemplate; context: { id: adminRoomId }">
+        </ng-container>
+      </div>
+      <ng-template #roomIdButtonsTemplate let-id="id">
+        <div>
+          <button mat-icon-button
+              aria-label="Copy link"
+              matTooltip="Copy ID to clipboard"
+              matTooltipPosition="left"
+              (click)="copyRoomId(id)">
+            <mat-icon class="icon" [inline]="true">content_copy</mat-icon>
+          </button>
+          <button mat-icon-button
+              aria-label="Copy link"
+              matTooltip="Copy direct link to clipboard"
+              matTooltipPosition="right"
+              (click)="copyRoomLink(id)">
+            <mat-icon class="icon" [inline]="true">link</mat-icon>
+          </button>
+        </div>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>
