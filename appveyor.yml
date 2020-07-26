@@ -12,7 +12,7 @@ install:
   - ps: Install-Product node $env:nodejs_version
 before_build:
   - cmd: dotnet --version
-  - cmd: npm --version
+  - cmd: npm version
   - cmd: dotnet restore ./src/PlanningRoom.sln --verbosity m
 build_script:
   - cmd: dotnet publish ./src/PlanningRoom.Web/PlanningRoom.Web.csproj -c Release
