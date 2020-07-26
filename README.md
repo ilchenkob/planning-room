@@ -1,8 +1,8 @@
 # Planning poker room
 
-Circle CI | Docker Hub
+AppVeyor | Docker Hub
 |---|---|
-[![CircleCI](https://img.shields.io/circleci/build/github/ilchenkob/planning-room/master?label=build%20master)](https://app.circleci.com/pipelines/github/ilchenkob/planning-room?branch=master)|[![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/ilchenkob/planning-room)](https://hub.docker.com/r/ilchenkob/planning-room) [![Docker Pulls](https://img.shields.io/docker/pulls/ilchenkob/planning-room)](https://hub.docker.com/r/ilchenkob/planning-room)
+[![Build status](https://ci.appveyor.com/api/projects/status/72li56nb7vifn7ag/branch/master?svg=true)](https://ci.appveyor.com/project/ilchenkob/planning-room/branch/master)|[![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/ilchenkob/planning-room)](https://hub.docker.com/r/ilchenkob/planning-room) [![Docker Pulls](https://img.shields.io/docker/pulls/ilchenkob/planning-room)](https://hub.docker.com/r/ilchenkob/planning-room)
 
 This project is built on top of ASP.Net Core 3.1 and Angular 9
 
