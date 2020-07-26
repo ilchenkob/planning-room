@@ -1,0 +1,30 @@
+version: '0.4.{build}'
+image: Visual Studio 2019
+environment:
+  nodejs_version: "12"
+branches:
+  only:
+  - master
+  - develop
+init:
+  - cmd: git config --global core.autocrlf true
+install:
+  - ps: Install-Product node $env:nodejs_version
+before_build:
+  - cmd: dotnet --version
+  - cmd: npm version
+  - cmd: dotnet restore ./src/PlanningRoom.sln --verbosity m
+build_script:
+  - cmd: dotnet publish ./src/PlanningRoom.Web/PlanningRoom.Web.csproj -c Release
+after_build:
+  # Post-build actions
+artifacts:
+ - path: 'src/PlanningRoom.Web/bin/Release/netcoreapp3.1/publish'
+   name: PlanningRoom.Web
+   type: WebDeployPackage
+clone_depth: 1
+test_script:
+  # - cmd: dotnet xunit
+on_finish:
+  # there is nothing to cleanup
+deploy: off
