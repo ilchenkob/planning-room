@@ -33,28 +33,44 @@ namespace PlanningRoom.Web
 
         public override async Task OnDisconnectedAsync(Exception exception)
         {
-            if (_clients.TryGetValue(Context.ConnectionId, out ClientNotificationRequest request))
-            {
-                await _roomService.RemoveFromRoom(request.RoomId, request.UserId);
-            }
-
+            await DisconnectClient(Context.ConnectionId);
             await base.OnDisconnectedAsync(exception);
         }
 
         public Task JoinRoom(ClientNotificationRequest request)
         {
-            _clients.TryAdd(Context.ConnectionId, request);
+            if (request != null && !request.RoomId.IsNullOrEmpty())
+            {
+                _clients.TryAdd(Context.ConnectionId, request);
 
-            return Groups.AddToGroupAsync(Context.ConnectionId, request.RoomId);
+                return Groups.AddToGroupAsync(Context.ConnectionId, request.RoomId);
+            }
+
+            return Task.CompletedTask;
         }
 
-        public Task DisconnectUser(ClientNotificationRequest request)
+        public async Task DisconnectUser(ClientNotificationRequest request)
         {
             var connectionId = _clients.FirstOrDefault(i => i.Value.RoomId == request.RoomId
                                                             && i.Value.UserId == request.UserId).Key;
-            return connectionId.IsNullOrEmpty()
-                ? Task.CompletedTask
-                : Clients.Client(connectionId).SendAsync(Notifications.DisconnectMember);
+            if (!connectionId.IsNullOrEmpty())
+            {
+                await DisconnectClient(connectionId);
+                await Clients.Client(connectionId).SendAsync(Notifications.DisconnectMember);
+            }
+        }
+
+        private async Task DisconnectClient(string connectionId)
+        {
+            if (_clients.TryGetValue(connectionId, out ClientNotificationRequest request)
+                && request != null
+                && !request.RoomId.IsNullOrEmpty())
+            {
+                _clients.TryRemove(connectionId, out ClientNotificationRequest _);
+                await Groups.RemoveFromGroupAsync(connectionId, request.RoomId);
+
+                await _roomService.RemoveFromRoom(request.RoomId, request.UserId);
+            }
         }
     }
 }
